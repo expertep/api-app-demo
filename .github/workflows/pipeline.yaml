@@ -54,7 +54,7 @@ jobs:
           fi
 
 
-      - name: Build Rust and Push (Develop)
+      - name: Build and Push (Develop)
         if: ${{ github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/main'  }}
         env:
           USER_HARBOR: ${{ secrets.USER_HARBOR }}
@@ -66,7 +66,7 @@ jobs:
           docker build -t $REGISTRY/kubernetes-workshop/${{ env.IMAGE_NAME }}:$TAG .  
           docker push $REGISTRY/kubernetes-workshop/${{ env.IMAGE_NAME }}:$TAG
 
-      - name: Retag Rust and Push (Uat & Production)
+      - name: Retag and Push (Uat & Production)
         if: ${{  startsWith(github.ref, 'refs/tags/')  }}
         env:
           USER_HARBOR: ${{ secrets.USER_HARBOR }}
