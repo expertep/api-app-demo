@@ -44,7 +44,7 @@ jobs:
             echo "image_tag=${GITHUB_REF##*/}" >> $GITHUB_OUTPUT
             echo "ref_tag=uat-$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_OUTPUT
             echo "env=prd" >> $GITHUB_OUTPUT
-            echo "repo=miw1513/k8s-calculator-prd" >> $GITHUB_OUTPUT
+            echo "repo=expertep/ui-app-ci" >> $GITHUB_OUTPUT
             echo "path_repo=k8s-calculator-prd" >> $GITHUB_OUTPUT
           else
             echo "image_tag=dev-$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_OUTPUT
@@ -94,7 +94,7 @@ jobs:
       - name: Check out my other private repo
         uses: actions/checkout@v4
         with:
-          repository: ${{ needs.build.outputs.repo }}
+          repository: expertep/${{ needs.build.outputs.path_repo }}
           token: ${{ secrets.AUTH_GIT }}
           path: ${{ needs.build.outputs.path_repo }}
           ref: main
