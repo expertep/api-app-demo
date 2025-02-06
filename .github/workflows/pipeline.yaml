@@ -62,9 +62,6 @@ jobs:
           REGISTRY: ${{ secrets.REGISTRY_HARBOR }}
           TAG: ${{ steps.variables.outputs.image_tag }}
         run: |
-          echo $USER_HARBOR
-          echo $PASS_HARBOR
-          echo $REGISTRY
           echo $PASS_HARBOR | docker login $REGISTRY -u $USER_HARBOR --password-stdin
           docker build -t $REGISTRY/kubernetes-workshop/${{ env.IMAGE_NAME }}:$TAG .  
           docker push $REGISTRY/kubernetes-workshop/${{ env.IMAGE_NAME }}:$TAG
