@@ -61,10 +61,10 @@ jobs:
           PASS_HARBOR: ${{ secrets.PASS_HARBOR }}
           REGISTRY: ${{ secrets.REGISTRY_HARBOR }}
           TAG: ${{ steps.variables.outputs.image_tag }}
-        # echo $PASS_HARBOR | docker login  -u $USER_HARBOR --password-stdin
+        # echo $PASS_HARBOR | docker login $REGISTRY -u $USER_HARBOR --password-stdin
         # docker login habor.analytichpxv3.online -u tensedev --password Aa112233
         run: |
-          echo $PASS_HARBOR | docker login $REGISTRY -u $USER_HARBOR --password-stdin
+          echo "${{ secrets.PASS_HARBOR }}" | docker login "${{ secrets.REGISTRY_HARBOR }}" -u "${{ secrets.USER_HARBOR }}" --password-stdin
           docker build -t $REGISTRY/kubernetes-workshop/${{ env.IMAGE_NAME }}:$TAG .  
           docker push $REGISTRY/kubernetes-workshop/${{ env.IMAGE_NAME }}:$TAG
 
